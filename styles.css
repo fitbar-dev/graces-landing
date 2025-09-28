@@ -6,67 +6,140 @@
 }
 
 body {
-    font-family: 'Inter', sans-serif;
-    background-color: #0E0D34;
+    font-family: 'Fira Sans', sans-serif;
+    background-color: #0F0E2F;
     color: #FFF6EF;
     min-height: 100vh;
     display: flex;
     align-items: top;
+    margin-top: 5rem;
     justify-content: center;
-    line-height: 1.6;
+    line-height: 1.4;
+    padding: 0;
+    position: relative;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 1.2rem;
+    left: 1.2rem;
+    right: 1.2rem;
+    bottom: 1.2rem;
+    border: 2px solid #1E1C5E;
+    pointer-events: none;
+    z-index: 1000;
+}
+
+body::after {
+    content: '';
+    position: fixed;
+    top: calc(1.2rem + 0.5rem);
+    left: calc(1.2rem + 0.5rem);
+    right: calc(1.2rem + 0.5rem);
+    bottom: calc(1.2rem + 0.5rem);
+    border: 4px solid #1E1C5E;
+    pointer-events: none;
+    z-index: 1000;
+}
+
+/* Mobile border spacing */
+@media (max-width: 768px) {
+    body::before {
+        top: 1.2rem;
+        left: 1.2rem;
+        right: 1.2rem;
+        bottom: 1.2rem;
+    }
+    
+    body::after {
+        top: calc(1.2rem + 0.5rem);
+        left: calc(1.2rem + 0.5rem);
+        right: calc(1.2rem + 0.5rem);
+        bottom: calc(1.2rem + 0.5rem);
+    }
 }
 
 .container {
     text-align: center;
     max-width: 800px;
-    padding: 2rem;
+    padding: 2rem 2rem 0 2rem;
     width: 100%;
 }
 
 /* Logo styling */
 .logo {
-    width: clamp(300px, 60vw, 400px);
-    height: auto;
-    margin-bottom: 3rem;
-    position: relative;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+    width: clamp(200px, 20vw, 300px);
+    border-bottom: 2px solid #1E1C5E;
 }
 
-.logo::after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60px;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, #FFF6EF, transparent);
-    opacity: 0.6;
-}
 
 /* Content styling */
 .content {
-    margin-bottom: 2rem;
+    padding: 2rem;
+}
+
+/* Amenities section styling */
+.amenities {
+    padding: 2rem;
+    margin-top: 2rem;
+}
+
+.amenities-title {
+    font-family: 'Bellefair', serif;
+    text-transform: uppercase;
+    font-size: clamp(1.0rem, 2vw, 1.4rem);
+    font-weight: 400;
+    color: #B7B0B5;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.05em;
+}
+
+.amenities-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.amenities-list li {
+    font-family: 'Fira Sans', sans-serif;
+    text-align: left;
+    font-size: clamp(0.9rem, 1.5vw, 1rem);
+    font-weight: 300;
+    color: #B7B0B5;
+    padding: 0.75rem 1rem;
+    background: rgba(30, 28, 94, 0.1);
+    transition: all 0.3s ease;
+}
+
+.amenities-list li:hover {
+    background: rgba(30, 28, 94, 0.2);
+    transform: translateX(5px);
 }
 
 .description {
-    font-size: clamp(1rem, 1rem, 1.2rem);
+    font-size: clamp(0.8rem, 0.8rem, 1rem);
     font-weight: 100;
     line-height: 1.4;
     margin-bottom: 3rem;
-    max-width: 600px;
+    width: clamp(300px, 60vw, 600px);
     margin-left: auto;
     margin-right: auto;
     opacity: 0.9;
+
 }
 
 /* Apply button styling */
 .apply-button {
-    font-family: 'Inter', sans-serif;
-    font-size: 1.1rem;
-    font-weight: 500;
+    font-family: 'Fira Sans', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 400;
     letter-spacing: 0.05em;
     background: transparent;
     color: #FFF6EF;
@@ -97,6 +170,12 @@ body {
     box-shadow: 0 10px 25px rgba(255, 246, 239, 0.2);
 }
 
+.divider {
+    width: clamp(200px, 20vw, 300px);
+    border: 1px solid #1E1C5E;
+    margin: 1rem auto;
+}
+
 .apply-button:hover::before {
     left: 0;
 }
@@ -109,10 +188,6 @@ body {
 @media (max-width: 768px) {
     .container {
         padding: 1.5rem;
-    }
-    
-    .logo {
-        margin-bottom: 2rem;
     }
     
     .description {
@@ -130,11 +205,7 @@ body {
     .container {
         padding: 1rem;
     }
-    
-    .logo {
-        margin-bottom: 1.5rem;
-    }
-    
+
     .description {
         margin-bottom: 2rem;
     }
@@ -150,28 +221,20 @@ body {
     .container {
         padding: 2.5rem;
     }
-    
-    .logo {
-        font-size: 5rem;
-    }
-    
+        
     .description {
-        font-size: 1.3rem;
+        font-size: 1.2rem;
     }
 }
 
 /* Large desktop adjustments */
-@media (min-width: 1200px) {
-    .logo {
-        font-size: 7rem;
-    }
-    
+@media (min-width: 1200px) { 
     .description {
-        font-size: 1.5rem;
+        font-size: 1.2rem;
     }
     
     .apply-button {
-        font-size: 1.2rem;
+        font-size: 1rem;
         padding: 1.2rem 3rem;
     }
 }
