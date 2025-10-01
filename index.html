@@ -18,6 +18,37 @@
     <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <script async src="https://tally.so/widgets/embed.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const videoTriggers = document.querySelectorAll('.video-trigger');
+            const containerVideo = document.querySelector('.container-video');
+            
+            if (videoTriggers.length && containerVideo) {
+                videoTriggers.forEach(function(trigger) {
+                    trigger.addEventListener('mouseenter', function() {
+                        const videoSrc = this.getAttribute('data-video');
+                        if (videoSrc) {
+                            // Update video source
+                            const source = containerVideo.querySelector('source');
+                            source.src = videoSrc;
+                            containerVideo.load(); // Reload video with new source
+                            
+                            // Show and play video
+                            containerVideo.style.opacity = '1';
+                            containerVideo.play().catch(function(error) {
+                                console.log('Video play failed:', error);
+                            });
+                        }
+                    });
+                    
+                    trigger.addEventListener('mouseleave', function() {
+                        containerVideo.style.opacity = '0';
+                        containerVideo.pause();
+                    });
+                });
+            }
+        });
+    </script>
     <meta property="og:image" content="graces-social-img.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="627">
@@ -31,6 +62,9 @@
 </head>
 <body>
     <div class="border-container">
+        <video class="container-video" preload="metadata" muted loop>
+            <source src="pickup-concierge.mp4" type="video/mp4">
+        </video>
         <div class="container">
             <header class="logo-section">
                 <img src="graces-logo_v1.svg" alt="Graces" class="logo">
@@ -49,16 +83,14 @@
             <section class="amenities">
                 <h2 class="amenities-title">Member Amenities</h2>
                 <ul class="amenities-list">
-                    <li>Online order pick-up</li>
-                    <li>Return drop-off</li>
-                    <li>Exclusive networking events</li>
-                    <li>Designer meet-and-greets</li>
-                    <li>Curated shopping experiences</li>
-                    <li>Tailoring services</li>
-                    <li>Care and repair services</li>
-                    <li>Borrow from the Graces wardrobe</li>
-                    <li>Photo/content studio access</li>
-                    <li>Bring up to 3 guests</li>
+                    <li class="video-trigger" data-video="pickup-concierge.mp4">Online order concierge</li>
+                    <li class="video-trigger" data-video="networking-events.mp4">Exclusive networking events</li>
+                    <li class="video-trigger" data-video="designer-meet-greets.mp4">Designer meet-and-greets</li>
+                    <li class="video-trigger" data-video="curated-shopping.mp4">Curated shopping experiences</li>
+                    <li class="video-trigger" data-video="tailoring-services.mp4">Tailoring services</li>
+                    <li class="video-trigger" data-video="graces-wardrobe.mp4">Borrow from the Graces wardrobe</li>
+                    <li class="video-trigger" data-video="photo-studio.mp4">Photo/content studio access</li>
+                    <li class="video-trigger" data-video="bring-guests.mp4">Bring up to 3 guests</li>
                 </ul>
             </section>
         </div>
